@@ -17,15 +17,28 @@ Lista criarListaVazia();
 Bool verificarVazia(Lista);
 void mostrarLista(Lista);
 void inserir(Lista*, int);
+void remover(Lista *, int y);//Remove a primeira aparição de y
+void removerOrdem(Lista *, int);//Remove o item de ordem k
 
 int main(){
     Lista c;
     c = criarListaVazia();
+
+    if(verificarVazia(c)){
+        printf("Lista vazia!\n");
+    }
+
     int i;
     for(i = 1; i < 6; i++){
         inserir(&c, i);
     }
     //c = inserir(c, 10);
+    mostrarLista(c);
+    printf("remover especifico: \n");
+    remover(&c, 2);
+    mostrarLista(c);
+    printf("remover ordem: \n");
+    removerOrdem(&c, 2);
     mostrarLista(c);
 
     return 0;
@@ -68,6 +81,54 @@ void inserir(Lista *L, int n){
     novo->next = L->inicio;
     L->inicio = novo;
     L->tamanho++;
+}
+
+void remover(Lista *L, int y){
+    if(!L->tamanho == 0){
+        Celula *p = L->inicio;
+        Celula *ant = L->inicio;
+
+        while(p != NULL && p->elemento != y){
+           ant = p; 
+           p = p->next; 
+        } 
+
+        if(p != NULL){
+            if(ant == p){
+                L->inicio = p->next;
+            }
+            else{
+                ant->next = p->next;  
+            }
+        }
+    }
+}
+
+void removerOrdem(Lista *L, int k){
+    if((k > 0 && k <= L->tamanho) && L->tamanho > 0){
+        Celula *p, *ant;
+        p = L->inicio;
+        ant = L->inicio;
+        int cont = 1;
+
+        while(cont != k){
+            p = p->next;
+            if(cont != k - 1){
+                ant = ant->next;
+            }
+            cont++;
+        }
+
+        if(cont == k){
+            if(ant == p){
+                L->inicio = p->next;
+            }
+            else{
+                ant->next = p->next;
+            }
+        }
+        
+    }
 }
 
 
