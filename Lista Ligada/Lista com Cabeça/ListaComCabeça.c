@@ -19,13 +19,14 @@ void mostrarLista(Lista);
 void inserir(Lista*, int);
 void remover(Lista *, int y);//Remove a primeira aparição de y
 void removerOrdem(Lista *, int);//Remove o item de ordem k
+void removerPrimeiro(Lista *);
 
 int main(){
     Lista c;
     c = criarListaVazia();
-
+    printf("verificar lista vazia:\n");
     if(verificarVazia(c)){
-        printf("Lista vazia!\n");
+        printf("Lista vazia!\n\n");
     }
 
     int i;
@@ -33,12 +34,16 @@ int main(){
         inserir(&c, i);
     }
     //c = inserir(c, 10);
+    printf("Lista inicial:\n");
     mostrarLista(c);
     printf("remover especifico: \n");
     remover(&c, 2);
     mostrarLista(c);
     printf("remover ordem: \n");
     removerOrdem(&c, 2);
+    mostrarLista(c);
+    printf("remover primeiro: \n");
+    removerPrimeiro(&c);
     mostrarLista(c);
 
     return 0;
@@ -70,7 +75,7 @@ void mostrarLista(Lista C){
             printf("%d  ", p->elemento);
             p = p->next;
         }while(p != NULL);
-        printf("\n");
+        printf("\n\n");
     }
 }
 
@@ -128,6 +133,12 @@ void removerOrdem(Lista *L, int k){
             }
         }
         
+    }
+}
+
+void removerPrimeiro(Lista *L){
+    if(L->tamanho > 0){
+       L->inicio = L->inicio->next;
     }
 }
 
