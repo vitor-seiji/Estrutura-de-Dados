@@ -17,6 +17,8 @@ Lista criarListaVazia();
 Bool verificarVazia(Lista);
 void mostrarLista(Lista);
 void inserir(Lista*, int);
+void inserirFinal(Lista *, int);
+void inserirOrdem(Lista *, int, int);
 void remover(Lista *, int y);//Remove a primeira aparição de y
 void removerOrdem(Lista *, int);//Remove o item de ordem k
 void removerPrimeiro(Lista *);
@@ -42,6 +44,10 @@ int main(){
     mostrarLista(c);
     printf("Tamanho: %d\n\n", c.tamanho);
 
+    printf("inserir ordem: ");
+    inserirOrdem(&c, 2, 10);
+    mostrarLista(c);
+
     printf("remover especifico: \n");
     remover(&c, 2);
     mostrarLista(c);
@@ -64,6 +70,11 @@ int main(){
 
     printf("remover ultimo: \n");
     removerUltimo(&c);
+    mostrarLista(c);
+    printf("Tamanho: %d\n\n", c.tamanho);
+
+    printf("inserir final: \n");
+    inserirFinal(&c, 4);
     mostrarLista(c);
     printf("Tamanho: %d\n\n", c.tamanho);
 
@@ -109,6 +120,42 @@ void inserir(Lista *L, int n){
     L->tamanho++;
 }
 
+void inserirFinal(Lista *L, int n){
+    Celula *novo = (Celula*)malloc(sizeof(Celula));
+    novo->elemento = n;
+    novo->next = NULL;
+
+    if(L->inicio == NULL){
+        L->inicio = novo;
+    }
+    else{
+        Celula *p = L->inicio;
+        while(p->next != NULL){
+            p = p->next;
+        }
+        p->next = novo;
+    }
+    L->tamanho++;
+}
+
+void inserirOrdem(Lista *L, int k, int n){
+    if(k > 0 && k <= L->tamanho + 1){
+        int cont;
+        Celula *p = L->inicio;
+        Celula *novo;
+        novo = (Celula*)malloc(sizeof(Celula));
+        novo->elemento = n;
+
+        for(cont = 1; cont < k - 1; cont++){
+            p = p->next;
+        }
+        
+        novo->next = p->next;
+        p->next = novo;
+        L->tamanho++;
+    }
+}
+
 void remover(Lista *L, int y){
     if(!L->tamanho == 0){
         Celula *p = L->inicio;
@@ -121,10 +168,14 @@ void remover(Lista *L, int y){
 
         if(p != NULL){
             if(ant == p){//Caso o valor seja o primeiro
+                Celula *aux = L->inicio;
                 L->inicio = p->next;
+                free(aux);
             }
             else{//"Pula" o valor 
+                Celula *aux = p;
                 ant->next = p->next;  
+                free(aux);
             }
         }
         L->tamanho--;
@@ -149,9 +200,11 @@ void removerOrdem(Lista *L, int k){//Remove o elemento de ordem k
         if(cont == k){
             if(ant == p){
                 L->inicio = p->next;
+                free(p);
             }
             else{
                 ant->next = p->next;
+                free(p);
             }
         }
         L->tamanho--;
@@ -160,25 +213,30 @@ void removerOrdem(Lista *L, int k){//Remove o elemento de ordem k
 
 void removerPrimeiro(Lista *L){
     if(L->tamanho > 0){
+       Celula *aux = L->inicio; 
        L->inicio = L->inicio->next;
+       free(aux);
        L->tamanho--;
     }
 }
 
 void removerUltimo(Lista *L){
     if(L->tamanho > 0){
-        Celula *p;
-        p = L->inicio;
-        if(p->next == NULL){//Caso a lista só tenha um elemento
-            p = NULL;
+        Celula *p = L->inicio;
+        
+        if(p->next == NULL){ // Caso só tenha um elemento
+            free(p);
+            L->inicio = NULL;
         }
         else{
-           while(p->next->next != NULL){
-             p = p->next;
+            Celula *ant = NULL;
+            while(p->next != NULL){
+                ant = p;
+                p = p->next;
             }
-            p->next = NULL; 
+            ant->next = NULL;
+            free(p); // Libera o último
         }
-
         L->tamanho--;
     }
 }
