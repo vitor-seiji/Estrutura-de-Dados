@@ -15,6 +15,7 @@ typedef struct{
 
 Lista criarListaVazia();
 Bool verificarVazia(Lista);
+int obterTamanho(Lista);
 void mostrarLista(Lista);
 void inserir(Lista*, int);
 void inserirFinal(Lista *, int);
@@ -103,6 +104,11 @@ Bool verificarVazia(Lista L){
     return vazia;
 }
 
+int obterTamanho(Lista L){
+    int tam;
+    tam = L.tamanho;
+    return tam;
+}
 void mostrarLista(Lista C){
     if(C.tamanho == 0){
         printf("Lista Vazia\n");
