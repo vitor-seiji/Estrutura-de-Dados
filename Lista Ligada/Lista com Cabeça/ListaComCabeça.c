@@ -20,6 +20,7 @@ void inserir(Lista*, int);
 void inserirFinal(Lista *, int);
 void inserirOrdem(Lista *, int, int);
 void remover(Lista *, int y);//Remove a primeira aparição de y
+void removerTodos(Lista*, int);//Remove todos os elementos de y
 void removerOrdem(Lista *, int);//Remove o item de ordem k
 void removerPrimeiro(Lista *);
 void removerUltimo(Lista *);
@@ -30,6 +31,7 @@ int main(){
     //Criando Lista vazia
     c = criarListaVazia();
     printf("verificar lista vazia:\n");
+
     if(verificarVazia(c)){
         printf("Lista vazia!\n\n");
     }
@@ -44,9 +46,19 @@ int main(){
     mostrarLista(c);
     printf("Tamanho: %d\n\n", c.tamanho);
 
-    printf("inserir ordem: ");
+    printf("inserir ordem:\n");
     inserirOrdem(&c, 2, 10);
     mostrarLista(c);
+    
+    printf("inserir final: \n");
+    inserirFinal(&c, 2);
+    mostrarLista(c);
+    printf("Tamanho: %d\n\n", c.tamanho);
+
+    printf("remover todos: \n");
+    removerTodos(&c, 2);
+    mostrarLista(c);
+    printf("Tamanho: %d\n\n", c.tamanho);
 
     printf("remover especifico: \n");
     remover(&c, 2);
@@ -60,11 +72,6 @@ int main(){
 
     printf("remover primeiro: \n");
     removerPrimeiro(&c);
-    mostrarLista(c);
-    printf("Tamanho: %d\n\n", c.tamanho);
-
-    printf("remover ultimo: \n");
-    removerUltimo(&c);
     mostrarLista(c);
     printf("Tamanho: %d\n\n", c.tamanho);
 
@@ -156,7 +163,7 @@ void inserirOrdem(Lista *L, int k, int n){
     }
 }
 
-void remover(Lista *L, int y){
+void remover(Lista *L, int y){//Remove a primeira aparição de y
     if(!L->tamanho == 0){
         Celula *p = L->inicio;
         Celula *ant = L->inicio;
@@ -179,6 +186,36 @@ void remover(Lista *L, int y){
             }
         }
         L->tamanho--;
+    }
+}
+
+void removerTodos(Lista *L, int y){//Remove todos os elementos y da Lista
+    if(L->tamanho > 0){
+        Celula *p, *ant;
+        p = L->inicio;
+        ant = NULL;
+        while(p != NULL){
+            if(p->elemento == y){
+                Celula *aux;
+                aux = p;
+                if(p == L->inicio){
+                    L->inicio = p->next;
+                    p = L->inicio;
+                }
+                else{
+                    ant->next = p->next;
+                    p = p->next;
+        
+                }
+                free(aux);
+                L->tamanho--;
+            }
+            else{
+                ant = p;
+                p = p->next; 
+            }
+            
+        }
     }
 }
 
