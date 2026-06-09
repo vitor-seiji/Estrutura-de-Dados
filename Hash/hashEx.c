@@ -53,11 +53,14 @@ int main (){
 		coli = calcularHash(A[i], 0);
 		colisao[coli]++;
 	}
-	for(i = 0; i < 13; i++){
+	for(i = 0; i < 47; i++){
 		colisao[i]--;
 	}
+	printf("\n\n");
+	printf("chave	colisao\n");
 	for(i = 0; i < 13; i++){
-		printf("%d ", colisao[i]);
+		printf("%d    :    %d ", i, colisao[i]);
+		printf("\n");
 	}
 	return 0;
 }
