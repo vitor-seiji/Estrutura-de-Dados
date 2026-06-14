@@ -62,13 +62,16 @@ int main (){
 		printf("%d    :    %d ", i, colisao[i]);
 		printf("\n");
 	}
+
+	//d-)
+
 	return 0;
 }
 
 unsigned char hash1(TipoChave K){
 	unsigned char hCode;
 	int i = 0;
-	calcularHash(K, i);
+	hCode = calcularHash(K, i);
 	return hCode;
 }
 
