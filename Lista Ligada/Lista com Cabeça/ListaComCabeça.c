@@ -22,6 +22,9 @@ void trocarCelulas(Lista *, Celula *, Celula *);
 Bool verificarCrescente(Lista);
 Bool verificarIgual (Lista, Lista);// Verifica se as duas listas contêm os mesmos elementos, não importa a ordem. As listas não contêm duplicatas
 
+Lista concatenarLista(Lista*, Lista*);//Concatena duas listas
+Lista inverterLista(Lista);//Inverte uma lista
+
 void inserir(Lista*, int); //Insere no inicio
 void inserirFinal(Lista *, int); //Insere no fim
 void inserirOrdem(Lista *, int, int); //Insere em uma posição específica
@@ -83,27 +86,10 @@ int main(){
     printf("Tamanho: %d\n\n", c.tamanho);
 
     mostrarLista(c);
+    c = inverterLista(c);
+    mostrarLista(c);
+
     mostrarLista(a);
-
-    Lista d, e;
-
-    d = criarListaVazia();
-    e = criarListaVazia();
-
-    for(i = 1; i <= 10; i++){
-        inserir(&d, i);
-        inserirFinal(&e, i);
-    }
-
-    mostrarLista(d);
-    mostrarLista(e);
-
-    if(verificarIgual(d, e)){
-        printf("igual");
-    }
-    else{
-        printf("nao igual");
-    }
 
     return 0;
 }
@@ -164,6 +150,72 @@ Bool verificarIgual(Lista A, Lista B){
         }
     }
     return igual;
+}
+
+Lista concatenarLista(Lista *A, Lista *B) {
+    Lista c;
+    c.tamanho = 0;
+    c.inicio = NULL; 
+
+    Celula *a = A->inicio;
+    Celula *b = B->inicio;
+    Celula *ultimoCriado = NULL; 
+
+    while (a != NULL) {
+        Celula *novo = (Celula*)malloc(sizeof(Celula));
+        novo->elemento = a->elemento;
+        novo->next = NULL;
+
+        // Se for o primeiro nó de todos na lista c
+        if (c.inicio == NULL) {
+            c.inicio = novo;
+        } else {
+            // Interliga o nó anterior ao novo nó
+            ultimoCriado->next = novo;
+        }
+        
+        ultimoCriado = novo; // O novo nó passa a ser o último
+        c.tamanho++;
+        a = a->next; 
+    }
+
+    while (b != NULL) {
+        Celula *novo = (Celula*)malloc(sizeof(Celula));
+        novo->elemento = b->elemento;
+        novo->next = NULL;
+
+        if (c.inicio == NULL) {
+            c.inicio = novo;
+        } else {
+            // Interliga o nó anterior (que veio de A ou do nó anterior de B) ao novo nó
+            ultimoCriado->next = novo;
+        }
+
+        ultimoCriado = novo;
+        c.tamanho++;
+        b = b->next;
+    }
+
+    return c;
+}
+
+Lista inverterLista(Lista A){
+    if(A.tamanho > 1){
+       Celula *atual, *anterior, *proximo;
+       anterior = NULL;
+       proximo = NULL;
+       atual = A.inicio;
+       while(atual != NULL){
+            proximo = atual->next;
+            atual->next = anterior;
+
+            anterior = atual;
+            atual = proximo;
+       }
+
+       A.inicio = anterior;
+    }
+    return A;
 }
 
 int obterTamanho(Lista L){
