@@ -1,64 +1,85 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "Booleano.h"
 #define fantasma 0
 
 typedef struct Celula {
-    int elemento;
+    unsigned char elemento;
     struct Celula *next;
 } Celula;
 
 typedef Celula* Lista; 
 
 // Protótipos corrigidos
-void newLista(Lista*);
-void mostrarLista(Lista*);
-int obterTamanho(Lista *);
-void inserirInicio(Lista*, int);
-void inserirFim(Lista *, int);
-void removerPrimeiro(Lista*);
-void removerUltimo(Lista *);
+Bool listaVazia(Lista);
+Lista esvaziarLista(Lista);
+Lista newLista();
+void mostrarLista(Lista);
+int obterTamanho(Lista );
+Celula* buscarItem(Lista, unsigned char);
+Lista inserirInicio(Lista, unsigned char);
+Lista inserirFim(Lista, unsigned char);
+Lista removerPrimeiro(Lista);
+Lista removerUltimo(Lista);
 
 int main(){
-    Lista A;
+    Lista A, B;
 
-    newLista(&A); 
+    A = newLista(); 
+    B = newLista();
 
     int i;
     for(i = 1; i <= 5; i++){
-        inserirFim(&A, i); 
+        A = inserirFim(A, 'a' + (i - 1)); 
+        B = inserirInicio(B, 'z' - (i - 1));
     }
     
-    mostrarLista(&A); 
+    mostrarLista(A); 
+    mostrarLista(B);
 
-    removerPrimeiro(&A);
-    removerUltimo(&A);
+    A = removerPrimeiro(A);
+    A = removerUltimo(A);
 
-    mostrarLista(&A); 
+    mostrarLista(A); 
 
-    printf("Tamanho: %d", obterTamanho(&A));
+    printf("Tamanho: %d", obterTamanho(A));
 
     return 0;
 }
 
-void newLista(Lista *L){
-    *L = NULL; 
+Lista newLista(){
+    Lista L;
+    L = NULL; 
+    return L;
 }
 
-void mostrarLista(Lista *L){
+Lista esvaziarLista(Lista A){
+    if(A != NULL){
+        Celula *p, *temp;
+        p = A;
+        while(p != NULL){
+            temp = p;
+            p = p->next;
+            free(temp);
+        }
+    }
+    return A;
+}
+void mostrarLista(Lista L){
     Celula *p;
-    p = *L;
+    p = L;
     while(p != NULL){
-        printf("%d ", p->elemento);
+        printf("%c ", p->elemento);
         p = p->next;
     }
     printf("\n");
 }
 
-int obterTamanho(Lista *L){
+int obterTamanho(Lista L){
     int cont = 0;
     if(L != NULL){
         Celula *p;
-        p = *L;
+        p = L;
         while(p != NULL){
             cont++;
             p = p->next;
@@ -66,23 +87,35 @@ int obterTamanho(Lista *L){
     }
     return cont;
 }
-void inserirInicio(Lista *L, int n){
+
+Celula* buscarItem(Lista A, unsigned char a){
+    Celula *p;
+    if(A != NULL){
+        p = A;
+        while(p != NULL && p->elemento != a){
+            p = p->next;
+        }
+    }
+    return p;
+}
+Lista inserirInicio(Lista L, unsigned char n){
     Celula *novo;
     novo = (Celula*)malloc(sizeof(Celula));
     novo->elemento = n;  
-    novo->next = *L; 
-    *L = novo;       
+    novo->next = L; 
+    L = novo;     
+    return L;  
 }
 
-void inserirFim(Lista *L, int n){
+Lista inserirFim(Lista L, unsigned char n){
     Celula *novo, *p;
-    p = *L;
+    p = L;
     novo = (Celula*)malloc(sizeof(Celula));
     novo->elemento = n;  
     novo->next = NULL;
 
     if(p == NULL){
-        *L = novo;
+        L = novo;
     }
     else{
         while(p->next != NULL){
@@ -90,25 +123,27 @@ void inserirFim(Lista *L, int n){
         }
         p->next = novo;
     }
+    return L;
 }
 
-void removerPrimeiro(Lista *L){
+Lista removerPrimeiro(Lista L){
     if(L != NULL){
         Celula *aux, *p;
-        p = *L;
+        p = L;
         p = p->next;
-        aux = *L;
-        *L = p;
+        aux = L;
+        L = p;
         free(aux);
     }
+    return L;
 }
 
-void removerUltimo(Lista *L){
+Lista removerUltimo(Lista L){
     if(L != NULL){
         Celula *p, *ant;
-        p = *L;
-        if(p->next == NULL){
-            *L = NULL;
+        p = L;
+        if(p->next == NULL){//Caso só tenha um elemento na lista
+            L = NULL;
         }
         else{
             while(p->next != NULL){
@@ -119,4 +154,5 @@ void removerUltimo(Lista *L){
         }
         free(p);
     }
+    return L;
 }

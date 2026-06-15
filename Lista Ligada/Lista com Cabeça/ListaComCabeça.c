@@ -18,12 +18,13 @@ Bool verificarVazia(Lista);
 
 int obterTamanho(Lista);
 void mostrarLista(Lista);
-void trocarCelulas(Lista *, Celula *, Celula *);
-Bool verificarCrescente(Lista);
+Bool verificarCrescente(Lista); //Verifica se uma lista esta em ordem crescente
 Bool verificarIgual (Lista, Lista);// Verifica se as duas listas contêm os mesmos elementos, não importa a ordem. As listas não contêm duplicatas
 
 Lista concatenarLista(Lista*, Lista*);//Concatena duas listas
 Lista inverterLista(Lista);//Inverte uma lista
+Lista separarLista(Lista *, int); // Divide a lista em duas listas, de modo que a segunda lista comece no primeiro elemento após a primeira ocorrência de y na lista original. 
+                                  // A lista original deve conter y como último elemento
 
 void inserir(Lista*, int); //Insere no inicio
 void inserirFinal(Lista *, int); //Insere no fim
@@ -88,7 +89,12 @@ int main(){
     mostrarLista(c);
     c = inverterLista(c);
     mostrarLista(c);
-
+    inserirFinal(&c, 67);
+    Lista b;
+    b = criarListaVazia();
+    b = separarLista(&c, 67);
+    mostrarLista(b);
+    mostrarLista(c);
     mostrarLista(a);
 
     return 0;
@@ -135,7 +141,8 @@ Bool verificarIgual(Lista A, Lista B){
         Celula *a = A.inicio, *b = B.inicio;
 
         while(a != NULL && igual == TRUE){
-        
+            contem = FALSE;
+            b = B.inicio;
             while(b != NULL && contem == FALSE){
                 if(a->elemento == b->elemento){
                     contem = TRUE;
@@ -146,7 +153,6 @@ Bool verificarIgual(Lista A, Lista B){
             if(contem == FALSE){
                 igual = FALSE;
             }
-            contem = FALSE;
         }
     }
     return igual;
@@ -216,6 +222,32 @@ Lista inverterLista(Lista A){
        A.inicio = anterior;
     }
     return A;
+}
+
+Lista separarLista(Lista *A, int n){
+    Lista b;
+    b.inicio = NULL;
+    b.tamanho = 0;
+    if(A->tamanho > 2){
+        Celula *p;
+        p = A->inicio;
+        while(p != NULL && p->elemento != n){
+            p = p->next;
+        }
+        if(p != NULL){
+            b.inicio = p->next;
+            p->next = NULL;
+            int cont = 0;
+            p = b.inicio;
+            while(p != NULL){
+                cont++;
+                p = p->next;
+            }
+            b.tamanho = cont;
+            A->tamanho = A->tamanho - cont;
+        }
+    }
+    return b;
 }
 
 int obterTamanho(Lista L){
@@ -298,10 +330,10 @@ void buscaInsere(Lista *A, int n){
     Celula *p;
     p = A->inicio;
     while (p != NULL && p->elemento != n){
-        p = p->next;
-        if(p->elemento == n){
+        if(p != NULL && p->elemento == n){
             existe = TRUE;
         }
+        p = p->next;
     }
     if(p->elemento == n){
         existe = TRUE;
@@ -319,7 +351,7 @@ void buscaInsere(Lista *A, int n){
 }
 
 void remover(Lista *L, int y){//Remove a primeira aparição de y
-    if(!L->tamanho == 0){
+    if(L->tamanho != 0){
         Celula *p = L->inicio;
         Celula *ant = L->inicio;
 
@@ -431,46 +463,4 @@ void removerUltimo(Lista *L){
     }
 }
 
-void trocarCelulas(Lista *L, Celula *A, Celula *B) {
-    // Se as duas referências forem para a mesma célula, nenhuma troca é necessária
-    if (A == B) {
-        return;
-    }
-
-    // 1. Encontrar os nós anteriores a A e B
-    Celula *antA = NULL, *antB = NULL;
-    Celula *atual = L->inicio;
-
-    while (atual != NULL && (antA == NULL || antB == NULL)) {
-        if (atual->next == A) {
-            antA = atual;
-        }
-        if (atual->next == B) {
-            antB = atual;
-        }
-        atual = atual->next;
-    }
-
-    // 2. Ajustar os ponteiros de quem vem ANTES de A e B
-    
-    // Se A for o início da lista
-    if (antA == NULL) {
-        L->inicio = B;
-    } else {
-        antA->next = B;
-    }
-
-    // Se B for o início da lista
-    if (antB == NULL) {
-        L->inicio = A;
-    } else {
-        antB->next = A;
-    }
-
-    // 3. Ajustar os ponteiros dos PRÓPRIOS nós (A->next e B->next)
-    // Precisamos de uma variável auxiliar para não perder a referência
-    Celula *temp = A->next;
-    A->next = B->next;
-    B->next = temp;
-}
 
