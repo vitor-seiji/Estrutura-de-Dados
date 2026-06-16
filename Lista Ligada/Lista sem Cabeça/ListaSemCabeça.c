@@ -10,7 +10,6 @@ typedef struct Celula {
 
 typedef Celula* Lista; 
 
-// Protótipos corrigidos
 Bool listaVazia(Lista);
 Lista esvaziarLista(Lista);
 Lista newLista();
@@ -43,6 +42,12 @@ int main(){
     mostrarLista(A); 
 
     printf("Tamanho: %d", obterTamanho(A));
+    
+    A = esvaziarLista(A);
+
+    mostrarLista(A); 
+
+    printf("Tamanho: %d", obterTamanho(A));
 
     return 0;
 }
@@ -62,9 +67,11 @@ Lista esvaziarLista(Lista A){
             p = p->next;
             free(temp);
         }
+        A = NULL;
     }
     return A;
 }
+
 void mostrarLista(Lista L){
     Celula *p;
     p = L;
@@ -98,6 +105,7 @@ Celula* buscarItem(Lista A, unsigned char a){
     }
     return p;
 }
+
 Lista inserirInicio(Lista L, unsigned char n){
     Celula *novo;
     novo = (Celula*)malloc(sizeof(Celula));

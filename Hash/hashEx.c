@@ -1,6 +1,6 @@
 /* exercicio HASHING */
 /* Arquivo: EXPF26.c
-   Autor: LISBETE MADSEN BARBOSA
+   Autor: Vitor Seiji Colombo Nishida
    Data: 22/02/26 11:57
    Descrição - Exercício adaptado do texto sobre Hash do prof. Paulo Feofiloff
 */
