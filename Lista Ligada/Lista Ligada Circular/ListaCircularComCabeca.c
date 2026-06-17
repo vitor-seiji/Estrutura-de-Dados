@@ -21,7 +21,7 @@ Lista inserirFim(Lista, int);//Feito
 int obterTamanho(Lista );//Feito
 Celula* buscarItem(Lista, int);//Feito
 Lista removerPrimeiro(Lista);//Feito
-Lista removerUltimo(Lista);
+Lista removerUltimo(Lista);//Feito
 
 int main(){
     system("cls");
@@ -124,9 +124,10 @@ Lista inserirInicio(Lista L, int n){
     else{
         Celula *p;
         p = L.inicio;
-        do{
+        
+        while(p->next != L.inicio){
             p = p->next;
-        }while(p->next != L.inicio);//Percorre a lista até chegar no último
+        }//Percorre a lista até chegar no último
 
         novo->next = L.inicio;
         L.inicio = novo;
