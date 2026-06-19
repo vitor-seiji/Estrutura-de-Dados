@@ -56,9 +56,6 @@ void mostrarLista(Lista L){
         }while(p != NULL);
         printf("\n\n");
     }
-    else{
-        printf("lista vazia\n");
-    }
 }
 
 void criarLista(Lista *L){

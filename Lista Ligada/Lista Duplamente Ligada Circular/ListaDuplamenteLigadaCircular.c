@@ -78,9 +78,6 @@ void mostrarLista(Lista A){
         }while(p != A.inicio);
         printf("\n");
     }
-    else{
-        printf("lista vazia fi\n");
-    }
 }
 
 Bool listaVazia(Lista A){

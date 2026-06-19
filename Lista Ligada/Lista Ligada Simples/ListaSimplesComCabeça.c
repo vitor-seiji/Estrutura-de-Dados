@@ -266,7 +266,7 @@ void mostrarLista(Lista C){
             printf("%d  ", p->elemento);
             p = p->next;
         }while(p != NULL);
-        printf("\n\n");
+        printf("\n");
     }
 }
 
