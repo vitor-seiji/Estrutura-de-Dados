@@ -19,7 +19,7 @@ void criarLista(Lista *);//Feito
 void inserirInicio(Lista *, int);//Feito
 void inserirFim(Lista *, int);//Feito
 Bool listaVazia(Lista);//Feito
-void esvaziarLista(Lista *);
+void esvaziarLista(Lista *);//Feito
 void mostrarLista(Lista);//Feito
 int obterTamanho(Lista);//Feito
 Celula* buscarItem(Lista, int);//Feito

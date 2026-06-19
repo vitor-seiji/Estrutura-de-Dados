@@ -1,0 +1,89 @@
+[33mcommit 8e0c87425c68209bd45a2837bce12039ab02ae95[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Tue Jun 16 22:14:56 2026 -0300
+
+    preguiça
+
+[33mcommit 5ab7d1e9e4abc44efb122d69a43b598a136778ee[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Tue Jun 16 08:54:40 2026 -0300
+
+    add: lista circular com cabeca
+
+[33mcommit 3e8d706c0392c923c37fa1721f4e903476f37a83[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Mon Jun 15 19:12:09 2026 -0300
+
+    add listaSemCabeca
+
+[33mcommit 6ad5f0bc8899eac22a63717bfa7e245059d8e9c2[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Sun Jun 14 21:22:48 2026 -0300
+
+    add: concatenarLista e inverterLista
+
+[33mcommit b6c5a25efe3c5dabff3210e0a63e0aa4cef3284b[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Sat Jun 13 22:24:41 2026 -0300
+
+    add listacomcabeca
+
+[33mcommit 8159ec302bc5e9ca0a9ab80a688a8c4ba968f1c7[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Tue Jun 9 19:40:50 2026 -0300
+
+    pouca coisa
+
+[33mcommit f883ebdd6db8adc4f4cac5ba24829ad1c67f076b[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Tue Jun 9 08:58:12 2026 -0300
+
+    add: lista circular e hash
+
+[33mcommit 8d6625b2942e32e20a640c46a51ff35914d96e32[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Tue May 26 20:18:59 2026 -0300
+
+    começando com cabeça
+
+[33mcommit 8a361596eee07a818a05ecc1b5eb498991ce2b32[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Tue May 26 08:49:22 2026 -0300
+
+    add: lista dupla e lista circular
+
+[33mcommit 02725a0ed9f9bc31729d721232ea021d5381b784[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Mon May 25 18:35:37 2026 -0300
+
+    add inserirFinal e inserirOrdem
+
+[33mcommit 6f0b1ce2aea518eb34a6d4611a32194a5692645f[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Mon May 25 14:05:21 2026 -0300
+
+    add: remover ultimo
+
+[33mcommit bb2037430b1e01626d2c33383ce88e32fe4228dd[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Mon May 25 11:54:50 2026 -0300
+
+    add: removerPrimeiro
+
+[33mcommit 3d7fa6d91aeb730b19414dc61b60ee1d87347196[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Tue May 19 08:46:03 2026 -0300
+
+    remover funcionando
+
+[33mcommit 15fde3cee6eaf7ee3f894b4dfee9591f9280b945[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Tue May 19 07:52:29 2026 -0300
+
+    to tentando vdd
+
+[33mcommit 1239df622c17115dbd63b8c37b2905af02aa5538[m
+Author: Vitor Seiji <seijinishida@hotmail.com>
+Date:   Tue May 19 07:35:28 2026 -0300
+
+    Primeiro commit
