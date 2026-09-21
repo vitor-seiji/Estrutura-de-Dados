@@ -38,6 +38,9 @@ Arvore duplaDireita(Arvore);
 int calcularAltura(Arvore);
 int calcularNos(Arvore);
 
+//Buscar
+No* buscar(Arvore, int);
+
 
 //Mostrar Árvore
 int altura(Arvore raiz);
@@ -77,6 +80,16 @@ int main(){
     printf("Simples DuplaDireita:\n\n");
     A = duplaDireita(A);
     imprimeArvoreFormatada(A);
+
+    No *p = buscar(A, 15);
+
+    if(p == NULL){
+        printf("n achei :(\n");
+    }
+    else{
+        printf("buscar: %d", p->dado);
+    }
+    
     
     printf("\n\n");
     return 0;
@@ -256,6 +269,22 @@ Arvore duplaDireita(Arvore raiz){
     return raiz;
 }
 
+No* buscar(Arvore raiz, int n){
+    No *re;
+    re = NULL;
+    if(raiz != NULL){
+        if (raiz->dado == n) {
+            re = raiz;
+        } 
+        else {
+            re = buscar(raiz->noDir, n);
+            if (re == NULL) {
+                re = buscar(raiz->noEsq, n);
+            }
+        }
+    }
+    return re;
+}
 // Calcula a altura da árvore
 int altura(Arvore raiz){
     if(raiz == NULL) return 0;
